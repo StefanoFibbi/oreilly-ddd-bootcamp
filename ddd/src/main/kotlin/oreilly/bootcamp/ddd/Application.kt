@@ -24,6 +24,15 @@ fun main(args: Array<String>) {
                     quantity = 10,
                 )
             )
+            .add(
+                itemToAdd = Item(
+                    product = Product(name = "Apple pencil"),
+                    quantity = 10,
+                )
+            )
+            .removeAllProduct(
+                Product(name = "Rubber")
+            )
 
     println(cart.get())
 }

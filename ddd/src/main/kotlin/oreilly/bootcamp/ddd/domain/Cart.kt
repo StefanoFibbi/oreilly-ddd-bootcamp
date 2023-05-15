@@ -5,5 +5,10 @@ class Cart(
 ) {
 
     fun add(itemToAdd: Item) = Cart(items + itemToAdd)
+
+    fun removeAllProduct(product: Product) = Cart(
+        items = this.items.filterNot { it.product == product }
+    )
+
     fun get() = items
 }
