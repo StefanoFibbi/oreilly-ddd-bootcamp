@@ -34,5 +34,5 @@ fun main(args: Array<String>) {
                 Product(name = "Rubber")
             )
 
-    println(cart.get())
+    println(cart.items)
 }

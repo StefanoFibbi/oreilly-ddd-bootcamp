@@ -1,14 +1,11 @@
 package oreilly.bootcamp.ddd.domain
 
-class Cart(
-    private val items: Collection<Item> = emptyList()
+data class Cart(
+    val items: Collection<Item> = emptyList()
 ) {
+    fun add(itemToAdd: Item) = this.copy(items = items + itemToAdd)
 
-    fun add(itemToAdd: Item) = Cart(items + itemToAdd)
-
-    fun removeAllProduct(product: Product) = Cart(
+    fun removeAllProduct(product: Product) = this.copy(
         items = this.items.filterNot { it.product == product }
     )
-
-    fun get() = items
 }
