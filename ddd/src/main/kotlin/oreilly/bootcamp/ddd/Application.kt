@@ -41,5 +41,5 @@ fun main(args: Array<String>) {
             )
 
     println("Item in the cart: ${cart.items}")
-    println("Removed products: ${cart.removedProducts}")
+    println("Removed products: ${cart.removedProducts().map { it.productName }}")
 }
