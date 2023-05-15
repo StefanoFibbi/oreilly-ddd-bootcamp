@@ -33,6 +33,13 @@ fun main(args: Array<String>) {
             .removeAllProduct(
                 Product(name = "Rubber")
             )
+            .add(
+                itemToAdd = Item(
+                    product = Product(name = "Rubber"),
+                    quantity = 3,
+                )
+            )
 
-    println(cart.items)
+    println("Item in the cart: ${cart.items}")
+    println("Removed products: ${cart.removedProducts}")
 }
