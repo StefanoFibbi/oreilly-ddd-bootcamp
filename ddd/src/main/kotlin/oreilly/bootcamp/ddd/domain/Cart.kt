@@ -1,8 +1,15 @@
 package oreilly.bootcamp.ddd.domain
 
+import java.util.UUID
 import oreilly.bootcamp.ddd.domain.events.DomainEvent
 
+@JvmInline
+value class CartId(val value: UUID)
+fun UUID.toCartId() = CartId(this)
+
+
 data class Cart(
+    val id: CartId = UUID.randomUUID().toCartId(),
     val items: Collection<Item> = emptyList(),
     val events: Collection<DomainEvent> = emptyList()
 ) {
