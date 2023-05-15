@@ -6,23 +6,28 @@ import oreilly.bootcamp.ddd.domain.Currency
 import oreilly.bootcamp.ddd.domain.Item
 import oreilly.bootcamp.ddd.domain.Price
 import oreilly.bootcamp.ddd.domain.Product
+import oreilly.bootcamp.ddd.domain.service.CompetitorBasedPricer
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
 class DddApplication
 
 fun main(args: Array<String>) {
-
+    val competitorBasedPricer = CompetitorBasedPricer()
     val cart: Cart =
         Cart()
             .add(
                 itemToAdd = Item(
                     product = Product(
-                        name = "Pen",
-                        price = Price(
-                            amount = Amount(10.toBigDecimal()),
-                            currency = Currency.USD
+                        name = "Apple pencil",
+                        price = competitorBasedPricer.discountedPrice(
+                            productName = "Apple pencil",
+                            fallbackPrice = Price(
+                                amount = Amount(120.toBigDecimal()),
+                                currency = Currency.USD
+                            )
                         )
+
                     ),
                     quantity = 1,
                 )
@@ -31,9 +36,12 @@ fun main(args: Array<String>) {
                 itemToAdd = Item(
                     product = Product(
                         name = "Rubber",
-                        price = Price(
-                            amount = Amount(5.50.toBigDecimal()),
-                            currency = Currency.USD
+                        price = competitorBasedPricer.discountedPrice(
+                            productName = "Rubber",
+                            fallbackPrice = Price(
+                                amount = Amount(5.50.toBigDecimal()),
+                                currency = Currency.USD
+                            )
                         )
                     ),
                     quantity = 10,
