@@ -1,18 +1,20 @@
 package oreilly.bootcamp.ddd.domain
 
 import java.util.UUID
+import oreilly.bootcamp.ddd.domain.common.DomainModelEntity
+import oreilly.bootcamp.ddd.domain.common.EntityId
 import oreilly.bootcamp.ddd.domain.events.DomainEvent
 
 @JvmInline
-value class CartId(val value: UUID)
+value class CartId(val value: UUID) : EntityId
+
 fun UUID.toCartId() = CartId(this)
 
-
 data class Cart(
-    val id: CartId = UUID.randomUUID().toCartId(),
+    override val id: CartId = UUID.randomUUID().toCartId(),
     val items: Collection<Item> = emptyList(),
     val events: Collection<DomainEvent> = emptyList()
-) {
+) : DomainModelEntity() {
     fun add(itemToAdd: Item) = this.copy(
         items = items + itemToAdd,
         events = events + DomainEvent.ItemAddedToCartEvent.from(itemToAdd)
